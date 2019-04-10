@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 3 Example: Paired t-tests | STAT 419 Lecture Notes</title>
+  <meta name="description" content="Lecture notes for STAT 419: Applied Multivariate Statistics.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 3 Example: Paired t-tests | STAT 419 Lecture Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture notes for STAT 419: Applied Multivariate Statistics." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Example: Paired t-tests | STAT 419 Lecture Notes" />
+  
+  <meta name="twitter:description" content="Lecture notes for STAT 419: Applied Multivariate Statistics." />
+  
+
+<meta name="author" content="Kelly Bodwin">
+
+
+<meta name="date" content="2019-04-03">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intro.html">
+<link rel="next" href="matrix-algebra.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STAT 419 Lectures</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preamble</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#example-paired-t-tests"><i class="fa fa-check"></i>Example: Paired t-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="example-paired-t-tests-1.html"><a href="example-paired-t-tests-1.html"><i class="fa fa-check"></i><b>3</b> Example: Paired t-tests</a><ul>
+<li class="chapter" data-level="" data-path="example-paired-t-tests-1.html"><a href="example-paired-t-tests-1.html#result-1-paul-mccartney"><i class="fa fa-check"></i>Result 1: Paul McCartney</a></li>
+<li class="chapter" data-level="" data-path="example-paired-t-tests-1.html"><a href="example-paired-t-tests-1.html#result-2-hannah-montana"><i class="fa fa-check"></i>Result 2: Hannah Montana</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#scalars"><i class="fa fa-check"></i>Scalars</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#notation"><i class="fa fa-check"></i>Notation</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#in-real-life"><i class="fa fa-check"></i>In real life</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#r-code"><i class="fa fa-check"></i>R Code</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#basic-math-with-scalars"><i class="fa fa-check"></i>Basic math with scalars</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#vectors"><i class="fa fa-check"></i>Vectors</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#notation-1"><i class="fa fa-check"></i>Notation</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#in-real-life-1"><i class="fa fa-check"></i>In real life</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#r-code-1"><i class="fa fa-check"></i>R Code</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#basic-math-with-vectors"><i class="fa fa-check"></i>Basic math with vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#matrices"><i class="fa fa-check"></i>Matrices</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#notation-2"><i class="fa fa-check"></i>Notation</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#in-real-life-2"><i class="fa fa-check"></i>In real life</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#r-code-2"><i class="fa fa-check"></i>R Code</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#basic-math-with-matrices"><i class="fa fa-check"></i>Basic math with matrices</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#special-types-of-matrices"><i class="fa fa-check"></i>Special types of matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#matrix-multiplication"><i class="fa fa-check"></i>Matrix multiplication</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#dimensions"><i class="fa fa-check"></i>Dimensions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#inverses-and-determinants"><i class="fa fa-check"></i>Inverses and Determinants</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#eigenvalues-and-eigenvectors"><i class="fa fa-check"></i>Eigenvalues and Eigenvectors</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#singular-value-decomposition"><i class="fa fa-check"></i>Singular Value Decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#summary-statistics"><i class="fa fa-check"></i>Summary Statistics</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#mean-vectors"><i class="fa fa-check"></i>Mean vectors</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#covariance-matrices"><i class="fa fa-check"></i>Covariance matrices</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 419 Lecture Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="example-paired-t-tests-1" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Example: Paired t-tests</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(grades, 
+  <span class="kw">t.test</span>(midterm_grades, final_grades, 
+         <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>, <span class="dt">paired =</span> <span class="ot">FALSE</span>)
+)</code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  midterm_grades and final_grades
+## t = -0.24526, df = 8, p-value = 0.4062
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##      -Inf 19.74586
+## sample estimates:
+## mean of x mean of y 
+##      70.6      73.6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(grades, 
+  <span class="kw">t.test</span>(midterm_grades, final_grades, 
+         <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>, <span class="dt">paired =</span> <span class="ot">TRUE</span>)
+)</code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  midterm_grades and final_grades
+## t = -1.627, df = 4, p-value = 0.08954
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##       -Inf 0.9309312
+## sample estimates:
+## mean of the differences 
+##                      -3</code></pre>
+<table style="width:3%;">
+<colgroup>
+<col width="2%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>* This time, we accounted for the <em>relationship</em> between an individual’s two exam scores!</td>
+</tr>
+<tr class="even">
+<td><code>r grades %&gt;% summarize_at( vars(midterm_grades, final_grades), funs(sd, mean))</code></td>
+</tr>
+<tr class="odd">
+<td><code>##   midterm_grades_sd final_grades_sd midterm_grades_mean final_grades_mean ## 1          19.32097        19.35975                70.6              73.6</code></td>
+</tr>
+<tr class="even">
+<td>The <strong>variance</strong> of the <strong>difference of means</strong> is:</td>
+</tr>
+<tr class="odd">
+<td><span class="math display">\[\text{var}(\bar{X}_2 - \bar{X}_1) = (\sigma_1^2 + \sigma_2^2)/n\]</span></td>
+</tr>
+<tr class="even">
+<td><code>r var &lt;- (19.3^2 + 19.4^2)/5 var</code></td>
+</tr>
+<tr class="odd">
+<td><code>## [1] 149.77</code></td>
+</tr>
+<tr class="even">
+<td><code>r sqrt(var)</code></td>
+</tr>
+<tr class="odd">
+<td><code>## [1] 12.23806</code></td>
+</tr>
+<tr class="even">
+<td>But… they are not independent!</td>
+</tr>
+<tr class="odd">
+<td><code>r grades %&gt;% select(midterm_grades, final_grades) %&gt;% cov()</code></td>
+</tr>
+<tr class="even">
+<td><code>##                midterm_grades final_grades ## midterm_grades         373.30       365.55 ## final_grades           365.55       374.80</code></td>
+</tr>
+<tr class="odd">
+<td>The equation is actually:</td>
+</tr>
+<tr class="even">
+<td><span class="math display">\[\text{var}(\bar{X}_2 - \bar{X}_1) = (\sigma_1^2 + \sigma_2^2 - 2 \, \sigma_{12})/n\]</span></td>
+</tr>
+<tr class="odd">
+<td><code>r actual_var &lt;- (19.3^2 + 19.4^2 - 2*365)/5 actual_var</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] 3.77</code></td>
+</tr>
+<tr class="odd">
+<td><code>r sqrt(actual_var)</code></td>
+</tr>
+<tr class="even">
+<td><code>## [1] 1.941649</code></td>
+</tr>
+<tr class="odd">
+<td>## Goals of this class {-}</td>
+</tr>
+<tr class="even">
+<td>1. Expand your basic stats knowledge into the magical world of multiple variables.</td>
+</tr>
+<tr class="odd">
+<td>2. Teach you to responsibly consider and test variable relationships.</td>
+</tr>
+<tr class="even">
+<td>3. Show you classic and cutting edge methods for multivariate data.</td>
+</tr>
+<tr class="odd">
+<td>4. Have some fun with interesting datasets!</td>
+</tr>
+<tr class="even">
+<td>## Just for fun: My research</td>
+</tr>
+<tr class="odd">
+<td>- Data from <strong>last.fm</strong> music streaming site.</td>
+</tr>
+<tr class="even">
+<td>- <strong>Samples:</strong> Listeners <span class="math inline">\((n = 1893)\)</span></td>
+</tr>
+<tr class="odd">
+<td>- <strong>Variables:</strong> Artists <span class="math inline">\((d = 17,632)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>Goal:</strong> Given an artist, recommend related artists based on listener data.</p></li>
+<li><p>Many variables (whether or not a listener listened to each artist), very dependent!</p></li>
+</ul>
+<div id="result-1-paul-mccartney" class="section level3 unnumbered">
+<h3>Result 1: Paul McCartney</h3>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Artist</strong></th>
+<th><strong>Top 5 Tags</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Paul McCartney</td>
+<td>sad, classic rock, cool, british, beautiful</td>
+</tr>
+<tr class="even">
+<td>The Beatles</td>
+<td>60s, classic rock, british, psychedelic, &lt;3</td>
+</tr>
+<tr class="odd">
+<td>George Harrison</td>
+<td>classic rock, 70s, singer-songwriter, sad, british</td>
+</tr>
+<tr class="even">
+<td>John Lennon</td>
+<td>classic rock, singer-songwriter, 70s, british, male vocalists</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="result-2-hannah-montana" class="section level3 unnumbered">
+<h3>Result 2: Hannah Montana</h3>
+<table style="width:25%;">
+<colgroup>
+<col width="13%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Artist</strong></th>
+<th><strong>Top 5 Tags</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hannah Montana</td>
+<td>love at first listen, pop rock, soundtrack, amazing, female vocalist</td>
+</tr>
+<tr class="even">
+<td>Miley Cyrus</td>
+<td>&lt;3, catchy, love at first listen, amazing, pop rock</td>
+</tr>
+<tr class="odd">
+<td>Rihanna</td>
+<td>rnb, ballad, sexy, love, dance</td>
+</tr>
+<tr class="even">
+<td>Katy Perry</td>
+<td>pop rock, &lt;3, catchy, love, love at first listen</td>
+</tr>
+<tr class="odd">
+<td>Britney Spears</td>
+<td>catchy, female, sexy, amazing, dance</td>
+</tr>
+<tr class="even">
+<td>Ke$ha</td>
+<td>love at first listen, dance, &lt;3, pop, catchy</td>
+</tr>
+<tr class="odd">
+<td>Lady Gaga</td>
+<td>dance, female vocalist, love at first listen, catchy, sexy</td>
+</tr>
+<tr class="even">
+<td>Demi Lovato</td>
+<td>love at first listen, &lt;3, pop rock, catchy, female vocalist</td>
+</tr>
+<tr class="odd">
+<td>Avril Lavigne</td>
+<td>pop rock, canadian, pop punk, female, love at first listen</td>
+</tr>
+<tr class="even">
+<td>Taylor Swift</td>
+<td>country, &lt;3, catchy, love, amazing</td>
+</tr>
+<tr class="odd">
+<td>Selena Gomez</td>
+<td>&lt;3, pop rock, love at first listen, catchy, love</td>
+</tr>
+<tr class="even">
+<td>Ashley Tisdale</td>
+<td>&lt;3, catchy, pop rock, ballad, awesome</td>
+</tr>
+<tr class="odd">
+<td>Hilary Duff</td>
+<td>favorites, amazing, sexy, pop rock, dance</td>
+</tr>
+<tr class="even">
+<td>Christina Aguilera</td>
+<td>ballad, sexy, soul, rnb, amazing</td>
+</tr>
+<tr class="odd">
+<td>Jonas Brothers</td>
+<td>pop rock, &lt;3, love, love at first listen, amazing</td>
+</tr>
+<tr class="even">
+<td>Beyonce</td>
+<td>rnb, sexy, soul, ballad, female vocalist</td>
+</tr>
+<tr class="odd">
+<td>Glee Cast</td>
+<td>cover, love at first listen, love, catchy, soundtrack</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="matrix-algebra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Lectures_Bookdown.pdf", "Lectures_Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

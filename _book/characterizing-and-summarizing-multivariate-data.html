@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 3 Characterizing and Summarizing Multivariate Data | STAT 419 Lecture Notes</title>
+  <meta name="description" content="Lecture notes for STAT 419: Applied Multivariate Statistics.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 3 Characterizing and Summarizing Multivariate Data | STAT 419 Lecture Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Lecture notes for STAT 419: Applied Multivariate Statistics." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Characterizing and Summarizing Multivariate Data | STAT 419 Lecture Notes" />
+  
+  <meta name="twitter:description" content="Lecture notes for STAT 419: Applied Multivariate Statistics." />
+  
+
+<meta name="author" content="Kelly Bodwin">
+
+
+<meta name="date" content="2019-04-10">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="matrix-algebra.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STAT 419 Lectures</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course Policies</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#example-paired-t-tests"><i class="fa fa-check"></i>Example: Paired t-tests</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#goals-of-this-class"><i class="fa fa-check"></i>Goals of this class</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#just-for-fun-my-research"><i class="fa fa-check"></i>Just for fun: My research</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#result-1-paul-mccartney"><i class="fa fa-check"></i>Result 1: Paul McCartney</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#result-2-hannah-montana"><i class="fa fa-check"></i>Result 2: Hannah Montana</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>2</b> Matrix Algebra</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#scalars"><i class="fa fa-check"></i>Scalars</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#notation-and-examples"><i class="fa fa-check"></i>Notation and Examples</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#calculations-with-scalars"><i class="fa fa-check"></i>Calculations with scalars</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#vectors"><i class="fa fa-check"></i>Vectors</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#notation-and-examples-1"><i class="fa fa-check"></i>Notation and Examples</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#calculations-with-vectors"><i class="fa fa-check"></i>Calculations with vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#matrices"><i class="fa fa-check"></i>Matrices</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#examples"><i class="fa fa-check"></i>Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#matrix-multiplication"><i class="fa fa-check"></i>Matrix multiplication</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#trace-determinant-inverse"><i class="fa fa-check"></i>Trace, Determinant, Inverse</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#eigenvalues-and-singular-values"><i class="fa fa-check"></i>Eigenvalues and Singular Values</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#summary-statistics"><i class="fa fa-check"></i>Summary Statistics</a><ul>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#means-of-vectors"><i class="fa fa-check"></i>Means of Vectors</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#vectors-of-means"><i class="fa fa-check"></i>Vectors of Means</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#covariance-and-correlation-matrices"><i class="fa fa-check"></i>Covariance and correlation matrices</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#measures-of-dispersion"><i class="fa fa-check"></i>Measures of Dispersion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="characterizing-and-summarizing-multivariate-data.html"><a href="characterizing-and-summarizing-multivariate-data.html"><i class="fa fa-check"></i><b>3</b> Characterizing and Summarizing Multivariate Data</a><ul>
+<li class="chapter" data-level="" data-path="characterizing-and-summarizing-multivariate-data.html"><a href="characterizing-and-summarizing-multivariate-data.html#linear-combinations-of-random-variables"><i class="fa fa-check"></i>Linear Combinations of Random Variables</a><ul>
+<li class="chapter" data-level="" data-path="characterizing-and-summarizing-multivariate-data.html"><a href="characterizing-and-summarizing-multivariate-data.html#variances-of-linear-combinations"><i class="fa fa-check"></i>Variances of linear combinations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="characterizing-and-summarizing-multivariate-data.html"><a href="characterizing-and-summarizing-multivariate-data.html#practice"><i class="fa fa-check"></i>Practice</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 419 Lecture Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="characterizing-and-summarizing-multivariate-data" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Characterizing and Summarizing Multivariate Data</h1>
+<script>
+function example(ex_name) {
+    var x = document.getElementById(ex_name);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+<style>
+.example {
+  background-color: cornsilk;
+  color: blue;
+} 
+.q {
+  background-color: cornsilk;
+  color: darkred;
+  text-align: right;
+} 
+.alert {
+  background-color: light red;
+  color: dark blue;
+  font: bold;
+  text-align: center;
+} 
+button{
+  margin:auto;
+  display:block;
+  float: right;
+}
+</style>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">source</span>(<span class="st">&quot;/Users/kbodwin/Dropbox/Teaching/kb_sweave_extras.R&quot;</span>)</code></pre></div>
+<div id="linear-combinations-of-random-variables" class="section level2 unnumbered">
+<h2>Linear Combinations of Random Variables</h2>
+<p>Suppose we have some constants (scalars) <span class="math inline">\(a_1,a_2,\ldots,a_p\)</span>, and some variables <span class="math inline">\(y_1,y_2,\ldots,y_p\)</span>.</p>
+<p>A <strong>linear combination</strong> of the <span class="math inline">\(p\)</span> elements of <span class="math inline">\({\bf y}\)</span>, denoted <span class="math inline">\(z\)</span> is given by:</p>
+<p><span class="math display">\[z=a_1y_1+a_2y_2+\cdots+a_py_p \, = \, {\bf a}&#39;{\bf y}\]</span></p>
+<button onclick="example('z_scalar')">
+!!!
+</button>
+<div id="z_scalar" class="alert" style="display:none">
+<p>z is a scalar (or univariate random variable) </br></p>
+</div>
+<p>For example, suppose we have a sample of 5 students’ scores on 8 assignments - 5 homeworks, 2 midterms, and a final.</p>
+<p>The <span class="math inline">\(5 \times 8\)</span> data matrix is given by:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+HW1
+</th>
+<th style="text-align:right;">
+HW2
+</th>
+<th style="text-align:right;">
+HW3
+</th>
+<th style="text-align:right;">
+HW4
+</th>
+<th style="text-align:right;">
+HW5
+</th>
+<th style="text-align:right;">
+M1
+</th>
+<th style="text-align:right;">
+M2
+</th>
+<th style="text-align:right;">
+FIN
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+75
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+85
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+75
+</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[{\bf Y} = \left( \begin{array} 80 &amp; 90 &amp; 85 &amp; 70 &amp; 100 &amp; 65 &amp; 65 &amp; 75 \\\\ 75 &amp; 95 &amp; 80 &amp; 80 &amp; 90 &amp; 75 &amp; 60 &amp; 70 \\\\ 80 &amp; 80 &amp; 75 &amp; 70 &amp; 100 &amp; 90 &amp; 75 &amp; 85 \\\\ 70 &amp; 60 &amp; 100 &amp; 80 &amp; 95 &amp; 80 &amp; 90 &amp; 90 \\\\ 55 &amp; 80 &amp; 75 &amp; 65 &amp; 90 &amp; 70 &amp; 80 &amp; 75\end{array} \right)\]</span></p>
+<p>Suppose we consider the grading scheme that gives equal weight to each assignment:</p>
+<p><span class="math display">\[z=\frac{1}{8}(y_1+y_2+y_3+y_4+y_5+y_6+y_7+y_8)\]</span></p>
+<p>Then, Student 1 has a final grade of</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grade_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sum</span>(scores[<span class="dv">1</span>,])<span class="op">/</span><span class="dv">8</span>
+grade_<span class="dv">1</span></code></pre></div>
+<pre><code>## [1] 78.75</code></pre>
+<p><span class="math display">\[z=\frac{1}{8}(80 + 90 + 85 + 70 + 100 + 65 + 65 + 75) = 78.75\]</span></p>
+<p>If we wanted to calculate this grade average for all students simultaneously, we could represent this as a matrix calculation:</p>
+<p><span class="math display">\[\overline{{\bf z}} = {\bf j}&#39;{\bf Y}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowMeans</span>(scores)</code></pre></div>
+<pre><code>## [1] 78.750 78.125 81.875 83.125 73.750</code></pre>
+<div id="variances-of-linear-combinations" class="section level3 unnumbered">
+<h3>Variances of linear combinations</h3>
+<p>Recall that the <strong>covariance</strong> of a data matrix <span class="math inline">\({\bf Y}\)</span> shows you the variances and covariances between all the variables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cov</span>(scores)</code></pre></div>
+<pre><code>##        HW1     HW2    HW3    HW4   HW5     M1      M2    FIN
+## HW1 107.50   41.25  11.25  23.75 37.50  28.75  -60.00   8.75
+## HW2  41.25  180.00 -91.25 -16.25 -6.25 -51.25 -155.00 -98.75
+## HW3  11.25  -91.25 107.50  45.00  6.25  -3.75   60.00  47.50
+## HW4  23.75  -16.25  45.00  45.00 -6.25  15.00   -2.50  10.00
+## HW5  37.50   -6.25   6.25  -6.25 25.00  12.50    0.00  18.75
+## M1   28.75  -51.25  -3.75  15.00 12.50  92.50   38.75  51.25
+## M2  -60.00 -155.00  60.00  -2.50  0.00  38.75  142.50  80.00
+## FIN   8.75  -98.75  47.50  10.00 18.75  51.25   80.00  67.50</code></pre>
+</br>
+<button onclick="example('ex_cov')">
+Do students who do better on M1 and M2 tend to do better on the Final?
+</button>
+<div id="ex_cov" class="example" style="display:none">
+<p>Yes! The covariances are positive - 51.25 and 80. </br></p>
+</div>
+Now, we’d like to know what the variance is average grades is; i.e., the variance of the <em>univariate</em> variable <span class="math inline">\(z\)</span>. </br>
+<button onclick="example('ex_var')">
+What is wrong with the approach below?
+</button>
+<div id="ex_var" class="example" style="display:none">
+<p>We didn’t account for the relationships between the variables!!! </br></p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zs &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(scores)
+<span class="kw">var</span>(zs)</code></pre></div>
+<pre><code>## [1] 13.39844</code></pre>
+<p>Instead, we need to use our matrix representation to think about the variance.</p>
+<p>In univariate statistics, when you multiply a <em>variable</em> by a <em>constant</em>, you have to square the constant and multiply by the variance:</p>
+<p><span class="math display">\[\text{var}(aX) = a^2 \text{var}(X)\]</span></p>
+<p>The same idea applies in mulivariate statistics: when you <em>matrix multiply</em> a <em>data matrix</em> by a <em>constant vector</em>, you have to “square” the vector and multiply by the covariance.</p>
+<p><span class="math display">\[ \text{var}(z) = \text{var}({\bf Y}{\bf j}) \, = \, {\bf j}&#39; \text{Cov}(Y) {\bf j}\]</span> <span class="math display">\[ s^2(z) \, = \, {\bf j}&#39; S_Y {\bf j}\]</span></p>
+<button onclick="example('q_var')">
+???
+</button>
+<div id="q_var" class="q" style="display:none">
+<p>This is just a math rule - which you might derive in other classes!</p>
+</div>
+<button onclick="example('ex_var')">
+What is the dimension of var(z)?
+</button>
+<div id="ex_var" class="example" style="display:none">
+<p>1x1, it is a scalar!</p>
+</div>
+</div>
+</div>
+<div id="practice" class="section level2 unnumbered">
+<h2>Practice</h2>
+<p>Now consider the two weighting schemes for final grades: First, the “average all scores” approach we saw above. Second, a scheme where homework is worth 20%, midterms are worth 30%, and the final is worth 50%.</p>
+<p><span class="math display">\[z^{(1)}=\frac{1}{8}(y_1+y_2+y_3+y_4+y_5+y_6+y_7+y_8)\]</span> <span class="math display">\[z^{(2)}=\frac{1}{5}(y_1+y_2+y_3+y_4+y_5)\cdot0.2+\frac{1}{2}(y_6+y_7)\cdot0.3+y_8\cdot 0.5\]</span></p>
+<p>We can write this in matrix form as</p>
+<p><span class="math display">\[ z_2 = {\bf a}&#39;{\bf y}\]</span> where <span class="math inline">\({\bf a}\)</span> is…</p>
+<button onclick="example('ex_a')">
+Click for answer
+</button>
+<div id="ex_a" class="example" style="display:none">
+<p>a = (0.04, 0.04, 0.04, 0.04, 0.04, 0.15, 0.15, 0.5)</p>
+</div>
+<p>Thus, we can still use our matrix tricks - with <span class="math inline">\({\bf a}\)</span> instead of <span class="math inline">\({\bf j}\)</span> - to calculate everyone’s scores, as well as the covariances!</p>
+<p><span class="math display">\[{\bf z} = {\bf Y}{\bf a}\]</span> <span class="math display">\[s^2_z = {\bf a}&#39; S_Y {\bf a}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.04</span>, <span class="fl">0.04</span>, <span class="fl">0.04</span>, <span class="fl">0.04</span>, <span class="fl">0.04</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.5</span>)
+Y &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(scores)
+
+all_grades &lt;-<span class="st"> </span>Y <span class="op">%*%</span><span class="st"> </span>a
+all_grades</code></pre></div>
+<pre><code>##       [,1]
+## [1,] 74.00
+## [2,] 72.05
+## [3,] 83.45
+## [4,] 86.70
+## [5,] 74.60</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">var_grades &lt;-<span class="st"> </span><span class="kw">t</span>(a) <span class="op">%*%</span><span class="st"> </span><span class="kw">var</span>(Y) <span class="op">%*%</span><span class="st"> </span>a
+var_grades</code></pre></div>
+<pre><code>##          [,1]
+## [1,] 42.05675</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(var_grades)</code></pre></div>
+<pre><code>##          [,1]
+## [1,] 6.485118</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="matrix-algebra.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Lectures_Bookdown.pdf", "Lectures_Bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

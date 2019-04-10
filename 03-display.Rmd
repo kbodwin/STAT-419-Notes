@@ -1,0 +1,193 @@
+# Characterizing and Summarizing Multivariate Data
+
+<script>
+function example(ex_name) {
+    var x = document.getElementById(ex_name);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+
+<style>
+.example {
+  background-color: cornsilk;
+  color: blue;
+} 
+.q {
+  background-color: cornsilk;
+  color: darkred;
+  text-align: right;
+} 
+.alert {
+  background-color: light red;
+  color: dark blue;
+  font: bold;
+  text-align: center;
+} 
+button{
+  margin:auto;
+  display:block;
+  float: right;
+}
+</style>
+
+```{r}
+library(knitr)
+source("/Users/kbodwin/Dropbox/Teaching/kb_sweave_extras.R")
+```
+
+
+
+## Linear Combinations of Random Variables {-}
+
+
+Suppose we have some constants (scalars) $a_1,a_2,\ldots,a_p$, and some variables
+$y_1,y_2,\ldots,y_p$.  
+
+A **linear
+combination** of the $p$ elements of ${\bf y}$, denoted $z$ is
+given by:
+
+$$z=a_1y_1+a_2y_2+\cdots+a_py_p \, = \, {\bf a}'{\bf y}$$
+
+<button onclick="example('z_scalar')"> !!!</button>
+<div id="z_scalar" class="alert" style="display:none">
+z is a scalar (or univariate random variable)
+</br>
+</div>
+
+For example, suppose we
+have a sample of 5 students' scores on 8 assignments - 5 homeworks, 2 midterms, and a final.
+
+The $5 \times 8$ data matrix is given by:
+
+```{r, echo = FALSE}
+scores <- data.frame(
+  HW1 = c(80, 75, 80, 70, 55),
+  HW2 = c(90, 95, 80, 60, 80),
+  HW3 = c(85, 80, 75, 100, 75),
+  HW4 = c(70, 80, 70, 80, 65),
+  HW5 = c(100, 90, 100, 95, 90),
+  M1 = c(65, 75, 90, 80, 70),
+  M2 = c(65, 60, 75, 90, 80),
+  FIN = c(75, 70, 85, 90, 75)
+)
+```
+
+```{r, echo = FALSE}
+kable(scores)
+```
+
+$${\bf Y} = \left( \begin{array} `r rmat(scores)`\end{array} \right)$$
+
+Suppose we consider the grading scheme that gives equal weight to each assignment:
+
+$$z=\frac{1}{8}(y_1+y_2+y_3+y_4+y_5+y_6+y_7+y_8)$$
+
+Then, Student 1 has a final grade of
+
+
+```{r}
+grade_1 <- sum(scores[1,])/8
+grade_1
+```
+
+$$z=\frac{1}{8}(80 + 90 + 85 + 70 + 100 + 65 + 65 + 75) = `r grade_1`$$
+
+If we wanted to calculate this grade average for all students simultaneously, we could represent this as a matrix calculation:
+
+$$\overline{{\bf z}} = {\bf j}'{\bf Y}$$
+```{r}
+rowMeans(scores)
+```
+
+
+### Variances of linear combinations {-}
+
+Recall that the **covariance** of a data matrix ${\bf Y}$ shows you the variances and covariances between all the variables:
+
+```{r}
+cov(scores)
+```
+</br>
+<button onclick="example('ex_cov')"> Do students who do better on M1 and M2 tend to do better on the Final? </button>
+<div id="ex_cov" class="example" style="display:none">
+Yes!  The covariances are positive - 51.25 and 80.
+</br>
+</div>
+
+
+Now, we'd like to know what the variance is average grades is; i.e., the variance of the *univariate* variable $z$.
+</br>
+<button onclick="example('ex_var')"> What is wrong with the approach below? </button>
+<div id="ex_var" class="example" style="display:none">
+We didn't account for the relationships between the variables!!!
+</br>
+</div>
+
+
+```{r}
+zs <- rowMeans(scores)
+var(zs)
+```
+
+Instead, we need to use our matrix representation to think about the variance.
+
+In univariate statistics, when you multiply a *variable* by a *constant*, you have to square the constant and multiply by the variance:
+
+$$\text{var}(aX) = a^2 \text{var}(X)$$
+
+The same idea applies in mulivariate statistics:  when you *matrix multiply* a *data matrix* by a *constant vector*, you have to "square" the vector and multiply by the covariance.
+
+$$ \text{var}(z) = \text{var}({\bf Y}{\bf j}) \, = \, {\bf j}' \text{Cov}(Y) {\bf j}$$
+$$ s^2(z) \, = \, {\bf j}' S_Y {\bf j}$$
+
+
+<button onclick="example('q_var')"> ??? </button>
+<div id="q_var" class="q" style="display:none">
+This is just a math rule - which you might derive in other classes!
+</div>
+
+<button onclick="example('ex_var')"> What is the dimension of var(z)? </button>
+<div id="ex_var" class="example" style="display:none">
+1x1, it is a scalar!
+</div>
+
+## Practice {-}
+Now consider the two weighting schemes for final grades:  First, the "average all scores" approach we saw above.  Second, a scheme where homework is worth 20%, midterms are worth 30%, and the final is worth 50%.
+
+$$z^{(1)}=\frac{1}{8}(y_1+y_2+y_3+y_4+y_5+y_6+y_7+y_8)$$
+$$z^{(2)}=\frac{1}{5}(y_1+y_2+y_3+y_4+y_5)\cdot0.2+\frac{1}{2}(y_6+y_7)\cdot0.3+y_8\cdot 0.5$$
+
+We can write this in matrix form as
+
+$$ z_2 = {\bf a}'{\bf y}$$
+where ${\bf a}$ is...
+
+<button onclick="example('ex_a')"> Click for answer </button>
+<div id="ex_a" class="example" style="display:none">
+a = (0.04, 0.04, 0.04, 0.04, 0.04, 0.15, 0.15, 0.5)
+</div>
+
+Thus, we can still use our matrix tricks - with ${\bf a}$ instead of ${\bf j}$ - to calculate everyone's scores, as well as the covariances!
+
+
+$${\bf z} = {\bf Y}{\bf a}$$
+$$s^2_z = {\bf a}' S_Y {\bf a}$$
+
+
+
+```{r}
+a <- c(0.04, 0.04, 0.04, 0.04, 0.04, 0.15, 0.15, 0.5)
+Y <- as.matrix(scores)
+
+all_grades <- Y %*% a
+all_grades
+
+var_grades <- t(a) %*% var(Y) %*% a
+var_grades
+sqrt(var_grades)
+```

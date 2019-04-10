@@ -1,0 +1,160 @@
+# Introduction {#intro}
+
+The heart and soul of multivariate statistics is **relationships between variables**.
+
+
+How do we **describe** and **display** them?
+
+
+How do we **measure** and **estimate** them?
+
+
+How do we **test** them?
+
+
+How do we **account for** them?
+
+
+## Example: Paired t-tests {-}
+
+Recall from your introductory Statistics class:
+
+* **two-sample t-tests** compare the means of two **independent** samples
+* a **paired** t-test compares the mean difference from two **dependent** samples
+
+
+Consider
+
+* Midterm grades in Section 01 versus midterm grades in Section 02
+* Midterm grades in Stat 419 versus final grades in Stat 419
+
+
+```{r, include = FALSE}
+library(tidyverse)
+library(kableExtra)
+
+grades <- data.frame(
+  names = c("Mario", "Luigi", "Wario", "Waluigi", "Bowser"),
+  midterm_grades = c(85, 90, 65, 72, 41),
+  final_grades = c(89, 93, 61, 78, 47)
+)
+```
+
+```{r, echo = FALSE}
+grades %>% kable()
+```
+
+
+```{r}
+with(grades, 
+  t.test(midterm_grades, final_grades, 
+         alternative = "less", paired = FALSE)
+)
+```
+
+
+```{r}
+with(grades, 
+  t.test(midterm_grades, final_grades, 
+         alternative = "less", paired = TRUE)
+)
+```
+
+This time, we accounted for the *relationship* between an individual's two exam scores!
+
+
+```{r}
+grades %>% 
+  summarize_at(
+    vars(midterm_grades, final_grades),
+    funs(sd, mean))
+```
+
+The **variance** of the **difference of means** is:
+
+$$\text{var}(\bar{X}_2 - \bar{X}_1) = (\sigma_1^2 + \sigma_2^2)/n$$
+
+```{r}
+var <- (19.3^2 + 19.4^2)/5
+var
+```
+
+```{r}
+sqrt(var)
+```
+
+But... they are not independent!
+
+```{r}
+grades %>% select(midterm_grades, final_grades) %>% cov()
+```
+
+The equation is actually:
+
+$$\text{var}(\bar{X}_2 - \bar{X}_1) = (\sigma_1^2 + \sigma_2^2 - 2 \, \sigma_{12})/n$$
+
+```{r}
+actual_var <- (19.3^2 + 19.4^2 - 2*365)/5
+actual_var
+sqrt(actual_var)
+```
+
+
+## Goals of this class {-}
+
+1. Expand your basic stats knowledge into the magical world of multiple variables.
+
+2. Teach you to responsibly consider and test variable relationships.
+
+3. Show you classic and cutting edge methods for multivariate data.
+
+4. Have some fun with interesting datasets!
+
+
+
+## Just for fun: My research {-}
+
+- Data from **last.fm** music streaming site.
+
+- **Samples:**  Listeners $(n = 1893)$
+
+- **Variables:**  Artists $(d = 17,632)$
+
+
+- **Goal:** Given an artist, recommend related artists based on listener data.
+
+- Many variables (whether or not a listener listened to each artist), very dependent!
+
+
+### Result 1: Paul McCartney {-}
+
+|**Artist** | **Top 5 Tags** |
+|---------|-------|
+|Paul McCartney | sad, classic rock, cool, british, beautiful  |
+ | The Beatles | 60s, classic rock, british, psychedelic, <3 |
+|  George Harrison | classic rock, 70s, singer-songwriter, sad, british |
+|  John Lennon | classic rock, singer-songwriter, 70s, british, male vocalists |
+
+
+
+### Result 2:  Hannah Montana {-}
+
+|**Artist** | **Top 5 Tags** |
+|---------|-------|
+| Hannah Montana | love at first listen, pop rock, soundtrack, amazing, female vocalist | 
+|  Miley Cyrus | <3, catchy, love at first listen, amazing, pop rock | 
+|  Rihanna | rnb, ballad, sexy, love, dance | 
+|  Katy Perry | pop rock, <3, catchy, love, love at first listen | 
+|  Britney Spears | catchy, female, sexy, amazing, dance | 
+|  Ke$ha | love at first listen, dance, <3, pop, catchy | 
+|  Lady Gaga | dance, female vocalist, love at first listen, catchy, sexy | 
+|  Demi Lovato | love at first listen, <3, pop rock, catchy, female vocalist | 
+|  Avril Lavigne | pop rock, canadian, pop punk, female, love at first listen | 
+|  Taylor Swift | country, <3, catchy, love, amazing | 
+|  Selena Gomez | <3, pop rock, love at first listen, catchy, love | 
+|  Ashley Tisdale | <3, catchy, pop rock, ballad, awesome | 
+|  Hilary Duff | favorites, amazing, sexy, pop rock, dance | 
+|  Christina Aguilera | ballad, sexy, soul, rnb, amazing | 
+|  Jonas Brothers | pop rock, <3, love, love at first listen, amazing | 
+|  Beyonce | rnb, sexy, soul, ballad, female vocalist | 
+|  Glee Cast | cover, love at first listen, love, catchy, soundtrack | 
